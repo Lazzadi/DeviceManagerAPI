@@ -6,5 +6,7 @@
         public string Name { get; set; }
         public string Role { get; set; }
         public string Location { get; set; }
+
+        public List<Devices> Devices { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DeviceManagerAPI.Models
 {
-    public class Class
+    public class Devices
     {
         public int DeviceId { get; set; }
         public int UserID { get; set; }
