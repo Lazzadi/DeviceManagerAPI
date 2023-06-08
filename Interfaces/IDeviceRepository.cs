@@ -17,7 +17,7 @@ namespace DeviceManagerAPI.Interfaces
         
         ICollection<Devices> GetAllDevices(); //Load data from the DB
 
-        //Devices GetDeviceByID(int DeviceID); //Select an item from the DB based on an ID
+        Devices GetDeviceByID(int DeviceID); //Select an item from the DB based on an ID + Add validation in case device ID is incorrect
 
         
 

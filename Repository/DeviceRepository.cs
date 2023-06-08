@@ -21,5 +21,13 @@ namespace DeviceManagerAPI.Repository
                 .OrderBy(device => device.DeviceId)
                 .ToList();
         }
+
+        public Devices GetDeviceByID(int DeviceID)
+        {
+            return _context.Devices
+                .Where(device => device.DeviceId == DeviceID)
+                .FirstOrDefault();
+        }
+
     }
 }

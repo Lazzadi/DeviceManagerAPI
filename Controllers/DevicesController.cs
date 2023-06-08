@@ -21,14 +21,29 @@ namespace DeviceManagerAPI.Controllers
 
         public IActionResult GetAllDevices()
         {
-            var users = _deviceRepository.GetAllDevices();
+            var devices = _deviceRepository.GetAllDevices();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(users);
+            return Ok(devices);
         }
+
+        [HttpGet("{DeviceID}", Name = "GetDeviceByID")]
+        [ProducesResponseType(200, Type = typeof(Devices))]
+        public IActionResult GetDeviceByID(int DeviceID)
+        {
+            var devices = _deviceRepository.GetDeviceByID(DeviceID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(devices);
+        }
+
     }
 }
