@@ -1,6 +1,7 @@
 ﻿using DeviceManagerAPI.Data;
 using DeviceManagerAPI.Interfaces;
 using DeviceManagerAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeviceManagerAPI.Repository
 {
@@ -13,9 +14,12 @@ namespace DeviceManagerAPI.Repository
             _context = context;
         }
 
-        public ICollection<Devices> GetDevices()
+        public ICollection<Devices> GetAllDevices()
         {
-            return _context.Devices.OrderBy(p => p.DeviceId).ToList();
+            return _context.Devices
+                .Include(device => device.User)
+                .OrderBy(device => device.DeviceId)
+                .ToList();
         }
     }
 }

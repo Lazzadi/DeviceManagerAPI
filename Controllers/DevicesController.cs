@@ -19,9 +19,9 @@ namespace DeviceManagerAPI.Controllers
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Devices>))]
 
-        public IActionResult GetDevices()
+        public IActionResult GetAllDevices()
         {
-            var users = _deviceRepository.GetDevices();
+            var users = _deviceRepository.GetAllDevices();
 
             if (!ModelState.IsValid)
             {

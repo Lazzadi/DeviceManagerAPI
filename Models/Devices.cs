@@ -8,7 +8,8 @@ namespace DeviceManagerAPI.Models
 
         [Key] public int DeviceId { get; set; }
 
-        public Users? UserID { get; set; }
+        public int? UserID { get; set; }
+        public Users? User { get; set; }
        
         public string Name { get; set; }
         public string Manufacturer { get; set; }
