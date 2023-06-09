@@ -19,7 +19,7 @@ namespace DeviceManagerAPI.Interfaces
 
         Device GetDeviceByID(int DeviceID); //Select an item from the DB based on an ID + Add validation in case device ID is incorrect
 
-        
+        bool DeviceExists(int DeviceID);
 
     }
 }

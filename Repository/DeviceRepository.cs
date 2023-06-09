@@ -22,12 +22,17 @@ namespace DeviceManagerAPI.Repository
                 .ToList();
         }
 
-        public Device GetDeviceByID(int DeviceID)
+        public Device GetDeviceByID(int DeviceId)
         {
             return _context.Devices
                 .Include(device => device.User)
-                .Where(device => device.DeviceId == DeviceID)
+                .Where(device => device.DeviceId == DeviceId)
                 .FirstOrDefault();
+        }
+
+        public bool DeviceExists(int DeviceId)
+        {
+            return _context.Devices.Any(device => device.DeviceId == DeviceId);
         }
 
     }

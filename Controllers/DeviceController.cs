@@ -35,6 +35,11 @@ namespace DeviceManagerAPI.Controllers
         [ProducesResponseType(200, Type = typeof(Device))]
         public IActionResult GetDeviceByID(int DeviceID)
         {
+            if(!_deviceRepository.DeviceExists(DeviceID))
+            {
+                return NotFound();
+            }
+            
             var devices = _deviceRepository.GetDeviceByID(DeviceID);
 
             if (!ModelState.IsValid)
