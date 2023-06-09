@@ -24,5 +24,10 @@ namespace DeviceManagerAPI.Repository
                 .Where(user => user.UserId == UserID)
                 .FirstOrDefault();
         }
+
+        public bool UserExists(int UserId)
+        {
+            return _context.Users.Any(user => user.UserId == UserId);
+        }
     }
 }

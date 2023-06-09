@@ -6,5 +6,7 @@ namespace DeviceManagerAPI.Interfaces
     {
         ICollection<User> GetUsers();
         User GetUserByID(int UserID);
+
+        bool UserExists(int UserID);
     }
 }
