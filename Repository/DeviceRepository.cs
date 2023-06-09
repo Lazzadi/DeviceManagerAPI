@@ -42,11 +42,19 @@ namespace DeviceManagerAPI.Repository
             return Save();
             
         }
+        public bool UpdateDevice(Device device)
+        {
+            _context.Update(device);
+
+            return Save();
+        }
 
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        
     }
 }

@@ -88,5 +88,37 @@ namespace DeviceManagerAPI.Controllers
             return Ok("Successfully created device");
         }
 
+
+        [HttpPut("{DeviceId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateDevice(int DeviceId, [FromBody] UpdateDeviceDTO updatedDevice)
+        {
+            if (updatedDevice == null)
+                return BadRequest(ModelState);
+
+            if(DeviceId != updatedDevice.DeviceId)
+                return BadRequest(ModelState);
+
+            if(!_deviceRepository.DeviceExists(DeviceId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var deviceMap = _mapper.Map<Device>(updatedDevice);
+
+            if(!_deviceRepository.UpdateDevice(deviceMap))
+            {
+                ModelState.AddModelError("", "Something went terribly wrong :( ");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+
+
+        }
+
     }
 }

@@ -6,7 +6,7 @@ namespace DeviceManagerAPI.Interfaces
     {
         
         
-        //Insert a new item to the DB
+
         //Update an existing item
         //Delete a specific item
         //Show all devices in a list with the user who is using it
@@ -22,6 +22,8 @@ namespace DeviceManagerAPI.Interfaces
         bool DeviceExists(int DeviceID);
 
         bool CreateDevice(Device device);
+        bool UpdateDevice(Device device);
+
         bool Save();
 
     }
