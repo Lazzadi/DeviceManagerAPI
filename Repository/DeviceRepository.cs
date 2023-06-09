@@ -55,6 +55,10 @@ namespace DeviceManagerAPI.Repository
             return saved > 0 ? true : false;
         }
 
-        
+        public bool DeleteDevice(Device device)
+        {
+            _context.Remove(device);
+            return Save();
+        }
     }
 }

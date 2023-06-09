@@ -120,5 +120,28 @@ namespace DeviceManagerAPI.Controllers
 
         }
 
+
+        [HttpDelete("{DeviceId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteDevice(int DeviceId)
+        {
+            if (!_deviceRepository.DeviceExists(DeviceId))
+                return NotFound();
+
+            var deviceToDelete = _deviceRepository.GetDeviceByID(DeviceId);
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(!_deviceRepository.DeleteDevice(deviceToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting the device");
+            }
+
+            return NoContent();
+        }
+
     }
 }

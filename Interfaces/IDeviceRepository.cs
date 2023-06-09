@@ -7,8 +7,7 @@ namespace DeviceManagerAPI.Interfaces
         
         
 
-        //Update an existing item
-        //Delete a specific item
+
         //Show all devices in a list with the user who is using it
         //select a device to view its dtails
         //create a new device (validate that the item doesn't already exist and validate all fields have values
@@ -23,6 +22,7 @@ namespace DeviceManagerAPI.Interfaces
 
         bool CreateDevice(Device device);
         bool UpdateDevice(Device device);
+        bool DeleteDevice(Device device);
 
         bool Save();
 
