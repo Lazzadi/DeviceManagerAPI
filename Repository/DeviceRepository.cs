@@ -35,5 +35,18 @@ namespace DeviceManagerAPI.Repository
             return _context.Devices.Any(device => device.DeviceId == DeviceId);
         }
 
+        public bool CreateDevice(Device device)
+        {
+            _context.Add(device);
+
+            return Save();
+            
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace DeviceManagerAPI.Mapping
         public MappingProfiles()
         {
             CreateMap<Device, DeviceDTO>();
+            CreateMap<Device, CreateDeviceDTO>();
+            CreateMap<CreateDeviceDTO, Device>();
         }
     }
 }

@@ -21,5 +21,8 @@ namespace DeviceManagerAPI.Interfaces
 
         bool DeviceExists(int DeviceID);
 
+        bool CreateDevice(Device device);
+        bool Save();
+
     }
 }

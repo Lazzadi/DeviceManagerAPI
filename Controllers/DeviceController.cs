@@ -54,5 +54,39 @@ namespace DeviceManagerAPI.Controllers
             return Ok(devices);
         }
 
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateDevice([FromBody] CreateDeviceDTO createDevice)
+        {
+            if(createDevice == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var device = _deviceRepository.GetAllDevices()
+                .Where(d => d.Name.Trim().ToUpper() == createDevice.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if(device != null)
+            {
+                ModelState.AddModelError("", "Device already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var deviceMap = _mapper.Map<Device>(createDevice);
+
+            if(!_deviceRepository.CreateDevice(deviceMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created device");
+        }
+
     }
 }
