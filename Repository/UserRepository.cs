@@ -17,5 +17,12 @@ namespace DeviceManagerAPI.Repository
         {
             return _context.Users.OrderBy(p => p.UserId).ToList();
         }
+
+        public Users GetUserByID(int UserID)
+        {
+            return _context.Users
+                .Where(user => user.UserId == UserID)
+                .FirstOrDefault();
+        }
     }
 }

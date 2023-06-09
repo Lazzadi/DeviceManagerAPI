@@ -25,6 +25,7 @@ namespace DeviceManagerAPI.Repository
         public Devices GetDeviceByID(int DeviceID)
         {
             return _context.Devices
+                .Include(device => device.User)
                 .Where(device => device.DeviceId == DeviceID)
                 .FirstOrDefault();
         }
