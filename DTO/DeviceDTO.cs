@@ -1,24 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DeviceManagerAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace DeviceManagerAPI.Models
+namespace DeviceManagerAPI.DTO
 {
-    public class Devices
+    public class DeviceDTO
     {
-
         [Key] public int DeviceId { get; set; }
 
-        public int? UserID { get; set; }
-        public Users? User { get; set; }
-       
+        //public int? UserID { get; set; } do we want the user ID to be shown?
+        public User? User { get; set; }
+
         public string Name { get; set; }
         public string Manufacturer { get; set; }
         public string type { get; set; }
         public string OperatingSystem { get; set; }
-        public string OSVersion{ get; set; }
+        public string OSVersion { get; set; }
         public string Processor { get; set; }
         public int RAMAmount { get; set; }
-        
 
     }
 }

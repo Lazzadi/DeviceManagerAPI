@@ -11,8 +11,8 @@ namespace DeviceManagerAPI.Data
         
         }
 
-        public DbSet<Devices> Devices { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
     }

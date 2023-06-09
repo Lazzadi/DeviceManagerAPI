@@ -14,7 +14,7 @@ namespace DeviceManagerAPI.Repository
             _context = context;
         }
 
-        public ICollection<Devices> GetAllDevices()
+        public ICollection<Device> GetAllDevices()
         {
             return _context.Devices
                 .Include(device => device.User)
@@ -22,7 +22,7 @@ namespace DeviceManagerAPI.Repository
                 .ToList();
         }
 
-        public Devices GetDeviceByID(int DeviceID)
+        public Device GetDeviceByID(int DeviceID)
         {
             return _context.Devices
                 .Include(device => device.User)

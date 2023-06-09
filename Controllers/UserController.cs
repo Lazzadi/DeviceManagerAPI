@@ -8,17 +8,17 @@ namespace DeviceManagerAPI.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [ApiController]
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Users>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
 
         public IActionResult GetUsers()
         {
@@ -33,7 +33,7 @@ namespace DeviceManagerAPI.Controllers
         }
 
         [HttpGet("{UserID}", Name = "GetUserByID")]
-        [ProducesResponseType(200, Type = typeof(Users))]
+        [ProducesResponseType(200, Type = typeof(User))]
         public IActionResult GetUserByID(int UserID)
         {
             var users = _userRepository.GetUserByID(UserID);

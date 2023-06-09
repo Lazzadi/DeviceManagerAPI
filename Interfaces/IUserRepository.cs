@@ -4,7 +4,7 @@ namespace DeviceManagerAPI.Interfaces
 {
     public interface IUserRepository
     {
-        ICollection<Users> GetUsers();
-        Users GetUserByID(int UserID);
+        ICollection<User> GetUsers();
+        User GetUserByID(int UserID);
     }
 }

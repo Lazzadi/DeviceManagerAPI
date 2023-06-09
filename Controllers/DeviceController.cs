@@ -7,17 +7,17 @@ namespace DeviceManagerAPI.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [ApiController]
-    public class DevicesController : Controller
+    public class DeviceController : Controller
     {
         private readonly IDeviceRepository _deviceRepository;
 
-        public DevicesController(IDeviceRepository deviceRepository)
+        public DeviceController(IDeviceRepository deviceRepository)
         {
             _deviceRepository = deviceRepository;
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Devices>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Device>))]
 
         public IActionResult GetAllDevices()
         {
@@ -32,7 +32,7 @@ namespace DeviceManagerAPI.Controllers
         }
 
         [HttpGet("{DeviceID}", Name = "GetDeviceByID")]
-        [ProducesResponseType(200, Type = typeof(Devices))]
+        [ProducesResponseType(200, Type = typeof(Device))]
         public IActionResult GetDeviceByID(int DeviceID)
         {
             var devices = _deviceRepository.GetDeviceByID(DeviceID);

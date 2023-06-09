@@ -13,12 +13,12 @@ namespace DeviceManagerAPI.Repository
             _context = context;
         }
 
-        public ICollection<Users> GetUsers()
+        public ICollection<User> GetUsers()
         {
             return _context.Users.OrderBy(p => p.UserId).ToList();
         }
 
-        public Users GetUserByID(int UserID)
+        public User GetUserByID(int UserID)
         {
             return _context.Users
                 .Where(user => user.UserId == UserID)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DeviceManagerAPI.DTO
 {
-    public class UsersDTO
+    public class UserDTO
     {
         [Key] public int UserId { get; set; }
 
@@ -11,6 +11,6 @@ namespace DeviceManagerAPI.DTO
         public string Role { get; set; }
         public string Location { get; set; }
 
-        public ICollection<Devices> Devices { get; set; }
+        public ICollection<Device> Devices { get; set; }
     }
 }
