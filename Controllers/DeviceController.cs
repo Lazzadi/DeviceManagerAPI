@@ -1,4 +1,6 @@
-﻿using DeviceManagerAPI.Interfaces;
+﻿using AutoMapper;
+using DeviceManagerAPI.DTO;
+using DeviceManagerAPI.Interfaces;
 using DeviceManagerAPI.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,12 @@ namespace DeviceManagerAPI.Controllers
     public class DeviceController : Controller
     {
         private readonly IDeviceRepository _deviceRepository;
+        private readonly IMapper _mapper;
 
-        public DeviceController(IDeviceRepository deviceRepository)
+        public DeviceController(IDeviceRepository deviceRepository, IMapper mapper)
         {
             _deviceRepository = deviceRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -21,7 +25,7 @@ namespace DeviceManagerAPI.Controllers
 
         public IActionResult GetAllDevices()
         {
-            var devices = _deviceRepository.GetAllDevices();
+            var devices = _mapper.Map<List<DeviceDTO>>(_deviceRepository.GetAllDevices());
 
             if (!ModelState.IsValid)
             {
@@ -40,7 +44,7 @@ namespace DeviceManagerAPI.Controllers
                 return NotFound();
             }
             
-            var devices = _deviceRepository.GetDeviceByID(DeviceID);
+            var devices = _mapper.Map<Device>(_deviceRepository.GetDeviceByID(DeviceID));
 
             if (!ModelState.IsValid)
             {

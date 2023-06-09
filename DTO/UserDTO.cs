@@ -11,6 +11,5 @@ namespace DeviceManagerAPI.DTO
         public string Role { get; set; }
         public string Location { get; set; }
 
-        public ICollection<Device> Devices { get; set; }
     }
 }

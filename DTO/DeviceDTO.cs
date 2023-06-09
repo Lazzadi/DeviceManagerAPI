@@ -7,7 +7,7 @@ namespace DeviceManagerAPI.DTO
     {
         [Key] public int DeviceId { get; set; }
 
-        //public int? UserID { get; set; } do we want the user ID to be shown?
+        //public int? UserID { get; set; } not showind userID to public
         public User? User { get; set; }
 
         public string Name { get; set; }
