@@ -3,6 +3,7 @@ using DeviceManagerAPI.DTO;
 using DeviceManagerAPI.Interfaces;
 using DeviceManagerAPI.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeviceManagerAPI.Controllers
@@ -22,6 +23,7 @@ namespace DeviceManagerAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Device>))]
+        [EnableCors]
 
         public IActionResult GetAllDevices()
         {
