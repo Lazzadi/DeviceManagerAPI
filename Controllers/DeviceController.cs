@@ -100,26 +100,31 @@ namespace DeviceManagerAPI.Controllers
             if (updatedDevice == null)
                 return BadRequest(ModelState);
 
-            if(DeviceId != updatedDevice.DeviceId)
+            if (DeviceId != updatedDevice.DeviceId)
                 return BadRequest(ModelState);
 
-            if(!_deviceRepository.DeviceExists(DeviceId))
+            if (!_deviceRepository.DeviceExists(DeviceId))
                 return NotFound();
 
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var deviceMap = _mapper.Map<Device>(updatedDevice);
+            // Fetch the existing device from the repository
+            var existingDevice = _deviceRepository.GetDeviceByID(DeviceId);
 
-            if(!_deviceRepository.UpdateDevice(deviceMap))
+            // Assign the User property value from the existing device to the updated device
+            updatedDevice.User = existingDevice.User;
+
+            // Map the updated properties from the DTO to the existing device object
+            _mapper.Map(updatedDevice, existingDevice);
+
+            if (!_deviceRepository.UpdateDevice(existingDevice))
             {
                 ModelState.AddModelError("", "Something went terribly wrong :( ");
                 return StatusCode(500, ModelState);
             }
 
             return NoContent();
-
-
         }
 
 

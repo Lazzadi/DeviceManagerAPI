@@ -7,6 +7,7 @@ namespace DeviceManagerAPI.DTO
     {
 
         [Key] public int? DeviceId { get; set; }
+        public User? User { get; set; }
         public string? Name { get; set; }
         public string? Manufacturer { get; set; }
         public string? type { get; set; }
