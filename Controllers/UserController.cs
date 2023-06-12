@@ -4,7 +4,11 @@ using DeviceManagerAPI.Interfaces;
 using DeviceManagerAPI.Models;
 using DeviceManagerAPI.Repository;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
+
 
 namespace DeviceManagerAPI.Controllers
 {
@@ -88,8 +92,11 @@ namespace DeviceManagerAPI.Controllers
         [HttpPost("login")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(400)]
+        [EnableCors]
         public IActionResult LoginUser([FromBody] UserLoginDTO user)
         {
+            
+
             if (user == null)
             {
                 return BadRequest(ModelState);
@@ -102,6 +109,7 @@ namespace DeviceManagerAPI.Controllers
 
             // Check if the email exists
             var existingUser = _userRepository.GetUserByEmail(user.Email);
+
             if (existingUser == null)
             {
                 ModelState.AddModelError("", $"User with email '{user.Email}' does not exist.");
@@ -116,8 +124,12 @@ namespace DeviceManagerAPI.Controllers
             }
 
             // Authentication successful
-            return Ok("Authentication successful");
+            string json = JsonSerializer.Serialize(existingUser);
+            return Ok(json);
+            
         }
+
+
 
     }
 }
