@@ -17,6 +17,8 @@ namespace DeviceManagerAPI.Mapping
             CreateMap<RegisterUserDTO, User>();
             CreateMap<User, UserLoginDTO>();
             CreateMap<UserLoginDTO, User>();
+            CreateMap<User, UserUpdateDTO>();
+            CreateMap<UserUpdateDTO, User>();
         }
     }
 }

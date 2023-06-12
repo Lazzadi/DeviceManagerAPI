@@ -42,6 +42,13 @@ namespace DeviceManagerAPI.Repository
             return Save();
         }
 
+        public bool UpdateUser(User user)
+        {
+            _context.Update(user);
+
+            return Save();
+        }
+
         public User LoginUser(string email, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
@@ -52,10 +59,17 @@ namespace DeviceManagerAPI.Repository
             return null;
         }
 
+        public bool DeleteUser(User user)
+        {
+            _context.Remove(user);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+
     }
 }

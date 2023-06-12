@@ -129,7 +129,65 @@ namespace DeviceManagerAPI.Controllers
             
         }
 
+        [HttpPut("{UserId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateUser(int UserId, [FromBody] UserUpdateDTO updatedUser)
+        {
+            if (updatedUser == null)
+                return BadRequest(ModelState);
 
+            if (UserId != updatedUser.UserId)
+                return BadRequest(ModelState);
+
+            if (!_userRepository.UserExists(UserId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            // Fetch the existing device from the repository
+            var existingUser = _userRepository.GetUserByID(UserId);
+
+            // Map the updated properties from the DTO to the existing device object
+            _mapper.Map(updatedUser, existingUser);
+
+            if (!_userRepository.UpdateUser(existingUser))
+            {
+                ModelState.AddModelError("", "Something went terribly wrong :( ");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+
+        [HttpDelete("{UserId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteUser(int UserId)
+        {
+            if (!_userRepository.UserExists(UserId))
+                return NotFound();
+
+            var userToDelete = _userRepository.GetUserByID(UserId);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_userRepository.DeleteUser(userToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting the device");
+            }
+
+            return NoContent();
+        }
 
     }
+
+
 }
+
