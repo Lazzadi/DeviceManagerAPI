@@ -41,6 +41,17 @@ namespace DeviceManagerAPI.Repository
             _context.Add(user);
             return Save();
         }
+
+        public User LoginUser(string email, string password)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user != null && user.Password == password)
+            {
+                return user;
+            }
+            return null;
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

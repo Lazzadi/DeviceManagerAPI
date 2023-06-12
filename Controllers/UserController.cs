@@ -84,5 +84,40 @@ namespace DeviceManagerAPI.Controllers
 
             return Ok("User was created");
         }
+
+        [HttpPost("login")]
+        [ProducesResponseType(200, Type = typeof(User))]
+        [ProducesResponseType(400)]
+        public IActionResult LoginUser([FromBody] UserLoginDTO user)
+        {
+            if (user == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Check if the email exists
+            var existingUser = _userRepository.GetUserByEmail(user.Email);
+            if (existingUser == null)
+            {
+                ModelState.AddModelError("", $"User with email '{user.Email}' does not exist.");
+                return NotFound(ModelState);
+            }
+
+            // Check if the password matches
+            if (existingUser.Password != user.Password)
+            {
+                ModelState.AddModelError("", "Invalid email or password.");
+                return BadRequest(ModelState);
+            }
+
+            // Authentication successful
+            return Ok("Authentication successful");
+        }
+
     }
 }
