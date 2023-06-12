@@ -7,6 +7,8 @@ namespace DeviceManagerAPI.Interfaces
         ICollection<User> GetUsers();
         User GetUserByID(int UserID);
 
+        User GetUserByEmail(string Email);
+
         bool UserExists(int UserID);
         bool CreateUser(User user);
 

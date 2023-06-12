@@ -25,6 +25,13 @@ namespace DeviceManagerAPI.Repository
                 .FirstOrDefault();
         }
 
+        public User GetUserByEmail(string Email)
+        {
+            return _context.Users
+                .Where(user => user.Email == Email)
+                .FirstOrDefault();
+        }
+
         public bool UserExists(int UserId)
         {
             return _context.Users.Any(user => user.UserId == UserId);

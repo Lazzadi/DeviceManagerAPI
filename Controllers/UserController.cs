@@ -66,6 +66,14 @@ namespace DeviceManagerAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Check if the email already exists
+            var existingUser = _userRepository.GetUserByEmail(user.Email);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("", $"User with email '{user.Email}' already exists.");
+                return Conflict(ModelState);
+            }
+
             var userToCreate = _mapper.Map<User>(user);
 
             if (!_userRepository.CreateUser(userToCreate))
