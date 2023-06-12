@@ -8,5 +8,7 @@ namespace DeviceManagerAPI.Interfaces
         User GetUserByID(int UserID);
 
         bool UserExists(int UserID);
+        bool CreateUser(User user);
+
     }
 }
