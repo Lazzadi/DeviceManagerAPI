@@ -54,7 +54,6 @@ namespace DeviceManagerAPI.Controllers
             return Ok(users);
         }
 
-        //Write a post request to add a new user
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(User))]
         [ProducesResponseType(400)]
@@ -70,7 +69,6 @@ namespace DeviceManagerAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Check if the email already exists
             var existingUser = _userRepository.GetUserByEmail(user.Email);
             if (existingUser != null)
             {
@@ -107,7 +105,6 @@ namespace DeviceManagerAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Check if the email exists
             var existingUser = _userRepository.GetUserByEmail(user.Email);
 
             if (existingUser == null)
