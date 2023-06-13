@@ -4,19 +4,11 @@ namespace DeviceManagerAPI.Interfaces
 {
     public interface IDeviceRepository
     {
-        
-        
 
-
-        //Show all devices in a list with the user who is using it
-        //select a device to view its dtails
-        //create a new device (validate that the item doesn't already exist and validate all fields have values
-        //update an existing device
-        //delete a device directly from the list
         
-        ICollection<Device> GetAllDevices(); //Load data from the DB
+        ICollection<Device> GetAllDevices();
 
-        Device GetDeviceByID(int DeviceID); //Select an item from the DB based on an ID + Add validation in case device ID is incorrect
+        Device GetDeviceByID(int DeviceID); 
 
         bool DeviceExists(int DeviceID);
 
